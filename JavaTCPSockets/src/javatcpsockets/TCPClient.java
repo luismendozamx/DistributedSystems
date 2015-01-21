@@ -21,9 +21,12 @@ public class TCPClient {
 		DataOutputStream out =
 			new DataOutputStream( s.getOutputStream());
 		out.writeUTF("Hello");        	// UTF is a string encoding 
+                out.writeInt(2);
                 
 		String data = in.readUTF();	      
-                System.out.println("Received: "+ data) ;      
+                System.out.println("Received: "+ data) ;
+                int data2 = in.readInt();      
+                System.out.println("Received: "+ data2) ;
        	    } 
             catch (UnknownHostException e) {
 		System.out.println("Sock:"+e.getMessage()); 
