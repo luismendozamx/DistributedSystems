@@ -40,13 +40,13 @@ class Connection extends Thread {
     @Override
     public void run(){
         try {			                 // an echo server
-            String data = in.readUTF();	 
-            int data2 = in.readInt();
+            //String data = in.readUTF();	 
+            int data = in.readInt();
             System.out.println("Message received from: " + clientSocket.getRemoteSocketAddress());
             System.out.println("Message: " + data);
-            out.writeUTF(data);
-            System.out.println("Message: " + data2);
-            out.writeInt(data2);
+            AddressBook addressBook = new AddressBook();
+            addressBook.getRecord(data);
+            out.writeUTF("User - " + addressBook.getRecord(data).getName());
         } 
         catch(EOFException e) {
             System.out.println("EOF:"+e.getMessage());

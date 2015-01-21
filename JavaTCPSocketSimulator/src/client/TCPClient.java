@@ -1,47 +1,75 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package client;
 
 import java.net.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TCPClient {
-
-    public static void main (String args[]) {
-
-	Socket s = null;
-	    try {
-	    	int serverPort = 7896;
-	   	
-                s = new Socket("localhost", serverPort);    
-                //s = new Socket("127.0.0.1", serverPort);    
-		DataInputStream in = new DataInputStream( s.getInputStream());
-		DataOutputStream out =
-			new DataOutputStream( s.getOutputStream());
-		out.writeUTF("Hello");        	// UTF is a string encoding 
-                out.writeInt(2);
-                
-		String data = in.readUTF();	      
-                System.out.println("Received: "+ data) ;
-                int data2 = in.readInt();      
-                System.out.println("Received: "+ data2) ;
-       	    } 
-            catch (UnknownHostException e) {
-		System.out.println("Sock:"+e.getMessage()); 
-	    }
-            catch (EOFException e) {
-                System.out.println("EOF:"+e.getMessage());
-    	    } 
-            catch (IOException e) {
-                System.out.println("IO:"+e.getMessage());
-            } finally {
-                if(s!=null)
-                    try {
-                        s.close();
-                    } catch (IOException e){
-                        System.out.println("close:"+e.getMessage());}
-                    }
-            }
+    
+    private String ip;
+    private int port;
+    private Socket socket;
+    private DataInputStream input;
+    private DataOutputStream output;
+    
+    public TCPClient(String ip, int port){
+        this.ip = ip;
+        this.port = port;
+        initTCPClient();
+    }
+    
+    private void initTCPClient(){
+        try {
+            this.socket = new Socket(this.ip, this.port);
+        } catch (IOException ex) {
+            Logger.getLogger(TCPClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void readDataFromServer(){
+        try {
+            this.input = new DataInputStream(this.socket.getInputStream());
+            String message = this.input.readUTF();
+            System.out.println("Received: "+ message);
+        } catch (IOException ex) {
+            Logger.getLogger(TCPClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void readIntFromServer(){
+        try {
+            this.input = new DataInputStream(this.socket.getInputStream());
+            int message = this.input.readInt();
+            System.out.println("Received: "+ message);
+        } catch (IOException ex) {
+            Logger.getLogger(TCPClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void writeDataToServer(String data){
+        try {
+            this.output = new DataOutputStream(this.socket.getOutputStream());
+            this.output.writeUTF(data);
+        } catch (IOException ex) {
+            Logger.getLogger(TCPClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void writeIntToServer(int data){
+        try {
+            this.output = new DataOutputStream(this.socket.getOutputStream());
+            this.output.writeInt(data);
+        } catch (IOException ex) {
+            Logger.getLogger(TCPClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void closeSocket(){
+        try {
+            this.socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(TCPClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
