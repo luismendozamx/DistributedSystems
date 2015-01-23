@@ -2,6 +2,8 @@ package server;
 
 import java.net.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class TCPServer {
@@ -24,14 +26,14 @@ public class TCPServer {
 }
 
 class Connection extends Thread {
-    DataInputStream in;
-    DataOutputStream out;
+    ObjectInputStream in;
+    ObjectOutputStream out;
     Socket clientSocket;
     public Connection (Socket aClientSocket) {
         try {
             clientSocket = aClientSocket;
-            in = new DataInputStream(clientSocket.getInputStream());
-            out =new DataOutputStream(clientSocket.getOutputStream());
+            out =new ObjectOutputStream(clientSocket.getOutputStream());
+            in = new ObjectInputStream(clientSocket.getInputStream());
          } catch(IOException e)  {
              System.out.println("Connection:"+e.getMessage());
          }
@@ -41,14 +43,15 @@ class Connection extends Thread {
     public void run(){
         try {			                 // an echo server
             //String data = in.readUTF();	 
-            int data = in.readInt();
+            Person data = (Person) in.readObject();
             
-            while(data != 5){
+            while(data != null){
                 System.out.println("Message received from: " + clientSocket.getRemoteSocketAddress());
                 System.out.println("Message: " + data);
                 AddressBook addressBook = new AddressBook();
-                out.writeUTF("User - " + addressBook.getRecord(data).getName());
-                data = in.readInt();
+                String name = addressBook.getRecord(data.getId()).getName();
+                out.writeObject(data);
+                data = (Person) in.readObject();
             }
             
         } 
@@ -57,6 +60,8 @@ class Connection extends Thread {
         } 
         catch(IOException e) {
             System.out.println("IO:"+e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 clientSocket.close();

@@ -6,21 +6,25 @@
 
 package server;
 
+import java.io.Serializable;
 /**
  *
  * @author JGUTIERRGARC
  */
-public class Person {
+public class Person implements Serializable{
     private int id;
     private String name;
+    private String lastName;
     
     public Person(){
         id=0;
         name="";
+        lastName = "";
     }
-    public Person(int id, String name){
+    public Person(int id, String name, String lastName){
         this.id= id;
         this.name= name;
+        this.lastName = lastName;
     }
     
     public int getId() {
@@ -37,6 +41,14 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
-    }    
+    }
+    
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String last_name) {
+        this.lastName = lastName;
+    }
     
 }

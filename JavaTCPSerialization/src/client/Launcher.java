@@ -14,8 +14,8 @@ public class Launcher {
     
     public static void main(String args[]){
         
-        for (int i = 0; i < 100; i++) {
-            ClientThread clientThread = new ClientThread(100);
+        for (int i = 0; i < 1; i++) {
+            ClientThread clientThread = new ClientThread(1);
             clientThread.start();
         }
         

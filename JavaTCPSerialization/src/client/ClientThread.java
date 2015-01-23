@@ -6,6 +6,8 @@
 
 package client;
 
+import server.Person;
+
 /**
  *
  * @author luismendoza
@@ -29,9 +31,9 @@ public class ClientThread extends Thread {
     public void run(){
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < n; i++) {
-            int random = (int)(Math.random() * 4);
-            client.writeIntToServer(random);
-            client.readDataFromServer();   
+            Person persona = new Person(2, "Luis", "Mendoza");
+            client.writeObjectToServer(persona);
+            Person respuesta = client.readObjectFromServer();
         }
         long totalTime = System.currentTimeMillis() - startTime;
         System.out.println("Timepo transcurrido: " + totalTime);

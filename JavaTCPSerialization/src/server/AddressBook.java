@@ -19,8 +19,9 @@ class AddressBook {
     
     private void fillAddressBook(){
         String[] names = {"Juan", "Jose", "Luis", "Agustin", "Jesus"};
+        String[] lastNames = {"Perez", "Incera", "Mendoza", "Flores", "Gonzalez"};
         for (int i=0; i<size; i++){
-            myAddressBook[i] = new Person(i, names[i%5]);
+            myAddressBook[i] = new Person(i, names[i%5], lastNames[i%5]);
         }
     }
 
