@@ -14,3 +14,6 @@ hs_err_pid*
 build/
 /JavaIPMulticast/nbproject/private/
 /WebApplication1/nbproject/private/
+/WebApplicationGetPost/nbproject/private/
+/WebApplicationGetPost/dist/
+/LabGetPost/nbproject/private/
