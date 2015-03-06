@@ -5,6 +5,7 @@
  */
 package proyectoalpha;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -16,16 +17,21 @@ import java.net.SocketException;
  * @author GALESSIA
  */
 public class Jugador extends javax.swing.JFrame {
-
+    private Conexion con;
+    public Integer id;
+    
     /**
      * Creates new form Jugador
      */
-    public Jugador() {
+    public Jugador(int id) {
         initComponents();
-    }
-    
-    public Jugador(String aux){
-        
+        this.id = (int)(Math.random()*500);
+        jLabel1.setText("ID de Jugador: " + this.id);
+        jLabel2.setText("");
+        jLabel3.setText("");
+        jLabel4.setText("");
+        jButton10.setEnabled(false);
+        //this.id = id;
     }
 
     /**
@@ -37,15 +43,20 @@ public class Jugador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -54,81 +65,230 @@ public class Jugador extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("Casilla 1");
+        jButton1.setText("Monstruo 1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jCheckBox2.setText("Casilla 2");
+        jButton2.setText("Monstruo 2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jCheckBox3.setText("Casilla 3");
+        jButton3.setText("Monstruo 3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jCheckBox4.setText("Casilla 4");
+        jButton4.setText("Monstruo 4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
-        jCheckBox5.setText("Casilla 5");
+        jButton5.setText("Monstruo 5");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        jCheckBox6.setText("Casilla 6");
+        jButton6.setText("Monstruo 6");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
-        jCheckBox7.setText("Casilla 7");
+        jButton7.setText("Monstruo 7");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
-        jCheckBox8.setText("Casilla 8");
+        jButton8.setText("Monstruo 8");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
-        jCheckBox9.setText("Casilla 9");
+        jButton9.setText("Monstruo 9");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("jLabel1");
+
+        jLabel2.setText("jLabel2");
+
+        jLabel3.setText("jLabel3");
+
+        jLabel4.setText("jLabel4");
+
+        jButton10.setText("Reiniciar");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBox7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox9))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton10))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBox4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox3)))
-                .addGap(80, 80, 80))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton4)
+                            .addComponent(jButton7))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton9))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(31, 31, 31)
+                                .addComponent(jButton3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton6)))))
+                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox2))
-                .addGap(40, 40, 40)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5)
-                    .addComponent(jCheckBox6))
-                .addGap(38, 38, 38)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox7)
-                    .addComponent(jCheckBox8)
-                    .addComponent(jCheckBox9))
-                .addContainerGap(81, Short.MAX_VALUE))
+                    .addComponent(jButton7)
+                    .addComponent(jButton8)
+                    .addComponent(jButton9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jButton10))
+                .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        Conexion con= new Conexion();
-        con.start();
+        this.con = new Conexion();
+        this.con.start();
     }//GEN-LAST:event_formWindowOpened
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(con.validaHit("1"))
+            sendHit();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(con.validaHit("2"))
+            sendHit();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(con.validaHit("3"))
+            sendHit();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if(con.validaHit("4"))
+            sendHit();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        reiniciaJuego();
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(con.validaHit("5"))
+            sendHit();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if(con.validaHit("6"))
+            sendHit();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        if(con.validaHit("7"))
+            sendHit();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        if(con.validaHit("8"))
+            sendHit();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+       if(con.validaHit("9"))
+            sendHit();
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    public void reiniciaJuego(){
+        jButton10.setEnabled(false);
+        jLabel2.setText("");
+        jLabel3.setText("");
+        jLabel4.setText("");
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(true);
+        jButton4.setEnabled(true);
+        jButton5.setEnabled(true);
+        jButton6.setEnabled(true);
+        jButton7.setEnabled(true);
+        jButton8.setEnabled(true);
+        jButton9.setEnabled(true);
+    }
     
+    public void sendHit(){
+        TCPClient jugador = new TCPClient("localhost", 7896);
+        jugador.writeIntToServer(this.id);
+        con.deseleccionaCasillas();
+    }
     
     
     
@@ -162,56 +322,101 @@ public class Jugador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Jugador().setVisible(true);
+                new Jugador(1).setVisible(true);
             }
         });
     }
+    public void correJugador(int id) {
+        new Jugador(id).setVisible(true);
+    }
     
+    public void terminaJuego (String num){
+        jLabel2.setText("Fin del Juego");
+
+        if( num.equals("0"+this.id)){
+            jLabel3.setText("Felicidades "+ num +" Ganaste!");
+        }else{
+            jLabel3.setText("Perdiste, ganó jugador " + num);
+        }
+
+        // Regresa botones a color inactivo
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(false);
+        jButton5.setEnabled(false);
+        jButton6.setEnabled(false);
+        jButton7.setEnabled(false);
+        jButton8.setEnabled(false);
+        jButton9.setEnabled(false);
+        
+        jButton10.setEnabled(true);
+    }
     private class Conexion extends Thread{
+        public Boolean active;
+        public String currentBox;
 
         public Conexion() {
+            this.active = false;
+            this.currentBox = "";
         }
        
         public void rellenaCasillas(String aux){
+            // 
+            this.currentBox = aux;
+            this.active = true;
+            jLabel4.setText(aux);
+            
             if (aux.equals("1")){
-                jCheckBox1.setSelected(true);
+                jButton1.setBackground(Color.red);
             }
             if (aux.equals("2")){
-                jCheckBox2.setSelected(true);
+                jButton2.setBackground(Color.red);
             }
             if (aux.equals("3")){
-                jCheckBox3.setSelected(true);
+                jButton3.setBackground(Color.red);
             }
             if (aux.equals("4")){
-                jCheckBox4.setSelected(true);
+                jButton4.setBackground(Color.red);
             }
             if (aux.equals("5")){
-                jCheckBox5.setSelected(true);
+                jButton5.setBackground(Color.red);
             }
             if (aux.equals("6")){
-                jCheckBox6.setSelected(true);
+                jButton6.setBackground(Color.red);
             }
             if (aux.equals("7")){
-                jCheckBox7.setSelected(true);
+                jButton7.setBackground(Color.red);
             }
             if (aux.equals("8")){
-                jCheckBox8.setSelected(true);
+                jButton8.setBackground(Color.red);
             }
             if (aux.equals("9")){
-                jCheckBox9.setSelected(true);
+                jButton9.setBackground(Color.red);
             }
         }
         
         public void deseleccionaCasillas (){
-            jCheckBox1.setSelected(false);
-            jCheckBox2.setSelected(false);
-            jCheckBox3.setSelected(false);
-            jCheckBox4.setSelected(false);
-            jCheckBox5.setSelected(false);
-            jCheckBox6.setSelected(false);
-            jCheckBox7.setSelected(false);
-            jCheckBox8.setSelected(false);
-            jCheckBox9.setSelected(false);
+            // Cambia bandera de casilla activa
+            this.active = false;
+            
+            // Regresa botones a color inactivo
+            jButton1.setBackground(Color.lightGray);
+            jButton2.setBackground(Color.lightGray);
+            jButton3.setBackground(Color.lightGray);
+            jButton4.setBackground(Color.lightGray);
+            jButton5.setBackground(Color.lightGray);
+            jButton6.setBackground(Color.lightGray);
+            jButton7.setBackground(Color.lightGray);
+            jButton8.setBackground(Color.lightGray);
+            jButton9.setBackground(Color.lightGray);
+            
+        }
+        
+        
+        
+        public boolean validaHit(String casilla){
+            return (casilla.equals(this.currentBox) && this.active);
         }
         
         public void run(){
@@ -221,7 +426,7 @@ public class Jugador extends javax.swing.JFrame {
             MulticastSocket s =null;
             while (ciclo == true){
                 try {
-                    InetAddress group = InetAddress.getByName("228.5.6.7"); // destination multicast group 
+                    InetAddress group = InetAddress.getByName("228.5.6.17"); // destination multicast group 
                     s = new MulticastSocket(6789);
                     s.joinGroup(group); 
 
@@ -233,8 +438,13 @@ public class Jugador extends javax.swing.JFrame {
                         s.receive(messageIn);
                         System.out.println("Message: " + new String(messageIn.getData())+ " from: "+ messageIn.getAddress());
                         num = new String(messageIn.getData()).trim();
+                        
+                        if(num.charAt(0) == '0'){
+                            terminaJuego(num);
+                        }else{
                             rellenaCasillas(num);
-                        Thread.sleep(1000);
+                            Thread.sleep(1000);
+                        }
                         if (!hilo.isAlive()){
                             deseleccionaCasillas();
                         }
@@ -255,19 +465,24 @@ public class Jugador extends javax.swing.JFrame {
             }
         }       
     }
-        
+    
         
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

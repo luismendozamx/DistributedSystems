@@ -1,4 +1,15 @@
-package server;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package servlet;
+
+/**
+ *
+ * @author luismendoza
+ */
 
 import java.net.*;
 import java.io.*;
@@ -8,9 +19,13 @@ import java.util.logging.Logger;
 
 public class TCPServer {
     
-    public static void main (String args[]) {
+    public TCPServer(){
+        // Constructor vacío
+    }
+    
+    public static void main(String[] args) {
         try{
-            int serverPort = 7896; 
+            int serverPort = 7855; 
             ServerSocket listenSocket = new ServerSocket(serverPort);
             while(true) {
                 System.out.println("Waiting for messages..."); 
@@ -26,14 +41,14 @@ public class TCPServer {
 }
 
 class Connection extends Thread {
-    ObjectInputStream in;
-    ObjectOutputStream out;
+    DataInputStream in;
+    DataOutputStream out;
     Socket clientSocket;
     public Connection (Socket aClientSocket) {
         try {
             clientSocket = aClientSocket;
-            out =new ObjectOutputStream(clientSocket.getOutputStream());
-            in = new ObjectInputStream(clientSocket.getInputStream());
+            out =new DataOutputStream(clientSocket.getOutputStream());
+            in = new DataInputStream(clientSocket.getInputStream());
          } catch(IOException e)  {
              System.out.println("Connection:"+e.getMessage());
          }
@@ -42,16 +57,16 @@ class Connection extends Thread {
     @Override
     public void run(){
         try {			                 // an echo server
-            //String data = in.readUTF();	 
-            Person data = (Person) in.readObject();
+            String data = in.readUTF();
             
             while(data != null){
                 System.out.println("Message received from: " + clientSocket.getRemoteSocketAddress());
                 System.out.println("Message: " + data);
-                AddressBook addressBook = new AddressBook();
-                String name = addressBook.getRecord(data.getId()).getName();
-                out.writeObject(data);
-                data = (Person) in.readObject();
+                // Modificar respuesta
+                data = data + "'";
+                
+                out.writeUTF(data);
+                data = in.readUTF();
             }
             
         } 
@@ -60,8 +75,6 @@ class Connection extends Thread {
         } 
         catch(IOException e) {
             System.out.println("IO:"+e.getMessage());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 clientSocket.close();
@@ -71,5 +84,3 @@ class Connection extends Thread {
         }
     }
 }
-
-

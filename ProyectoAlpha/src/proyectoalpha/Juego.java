@@ -5,25 +5,42 @@
  */
 package proyectoalpha;
 
+import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  *
  * @author GALESSIA
  */
 public class Juego extends javax.swing.JFrame  {
+    
+    public int maxPuntos;
+    public Integer[] lista;
 
     /**
      * Creates new form Juego
      */
     public Juego() {
         initComponents();
+        this.lista = new Integer[500];
+        this.maxPuntos = 5;
+        
+        for (int i = 0; i < lista.length; i++) {
+            lista[i] = 0;
+        }
     }
 
     /**
@@ -116,32 +133,32 @@ public class Juego extends javax.swing.JFrame  {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(86, 86, 86)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton7)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton9))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton4)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton6))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(77, 77, 77)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -151,76 +168,83 @@ public class Juego extends javax.swing.JFrame  {
                     .addComponent(jButton4)
                     .addComponent(jButton5)
                     .addComponent(jButton6))
-                .addGap(18, 18, 18)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7)
                     .addComponent(jButton8)
                     .addComponent(jButton9))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGap(95, 95, 95))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        createSocket("1");
+        sendObject("1");
+        receiveResponse();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        createSocket("3");
+        sendObject("3");
+        receiveResponse();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        createSocket("5");
+        sendObject("5");
+        receiveResponse();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        createSocket("7");
+        sendObject("7");
+        receiveResponse();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        createSocket("9");
+        sendObject("9");
+        receiveResponse();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        createSocket("2");
+        sendObject("2");
+        receiveResponse();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        createSocket("4");
+        sendObject("4");
+        receiveResponse();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        createSocket("6");
+        sendObject("6");
+        receiveResponse();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        createSocket("8");
+        sendObject("8");
+        receiveResponse();
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void createSocket(String message){
+    private void sendObject(String message){
         MulticastSocket s =null;
         try {
-
-            InetAddress group = InetAddress.getByName("228.5.6.7"); // destination multicast group
+            InetAddress group = InetAddress.getByName("228.5.6.17"); // destination multicast group
             s = new MulticastSocket(6789);
             s.joinGroup(group);
             //s.setTimeToLive(10);
             System.out.println("Messages' TTL (Time-To-Live): "+ s.getTimeToLive());
             String myMessage=message;
             byte [] m = myMessage.getBytes();
-            DatagramPacket messageOut =
-            new DatagramPacket(m, m.length, group, 6789);
+            DatagramPacket messageOut = new DatagramPacket(m, m.length, group, 6789);
             s.send(messageOut);
             Thread.sleep(1000);
             /*if(!hilo1.isAlive()){
                 deseleccionaCasillas();
             }*/
-
             s.leaveGroup(group);
         }
         catch (SocketException e){
             System.out.println("Socket: " + e.getMessage());
+            e.printStackTrace();
         }
         catch (IOException e){
             System.out.println("IO: " + e.getMessage());
@@ -229,6 +253,25 @@ public class Juego extends javax.swing.JFrame  {
         }
         finally {
             if(s != null) s.close();
+        }
+    }
+    
+    private void receiveResponse(){
+        try{
+            int serverPort = 7896; 
+            ServerSocket listenSocket = new ServerSocket(serverPort);
+            listenSocket.setSoTimeout(1000);
+            try{
+                System.out.println("Waiting for response..."); 
+                Socket clientSocket = listenSocket.accept();  // Listens for a connection to be made to this socket and accepts it. The method blocks until a connection is made. 
+                Connection c = new Connection(clientSocket);
+                c.start();
+            }catch(Exception e){
+                System.out.println("Listen :"+ e.getMessage());
+            }       
+            listenSocket.close();
+        } catch(IOException e) {
+            System.out.println("Listen :"+ e.getMessage());
         }
     }
     
@@ -266,7 +309,32 @@ public class Juego extends javax.swing.JFrame  {
             }
         });
     }
-
+    
+    public void correJuego() {
+        new Juego().setVisible(true);
+    }
+    
+    public void sumaScore(int data){
+        if(lista[data-1] != 0){
+            Integer n = lista[data-1];
+            lista[data-1] = n + 1;
+        }else{
+            lista[data-1] = 1;
+        }
+        
+        for(int i = 0; i < lista.length; i++ ){
+            if(lista[i] == this.maxPuntos)
+                terminaJuego(data);
+        }
+    }
+    
+    public void terminaJuego(int data){
+        for (int i = 0; i < lista.length; i++) {
+            lista[i] = 0;
+        }
+        sendObject("0"+data);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -278,4 +346,41 @@ public class Juego extends javax.swing.JFrame  {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     // End of variables declaration//GEN-END:variables
+    
+    class Connection extends Thread {
+        DataInputStream in;
+        Socket clientSocket;
+        public Connection (Socket aClientSocket) {
+            try {
+                clientSocket = aClientSocket;
+                in = new DataInputStream(clientSocket.getInputStream());
+             } catch(IOException e)  {
+                 System.out.println("Connection:"+e.getMessage());
+             }
+        }
+
+        @Override
+        public void run(){
+            try {
+                System.out.println("Message received from: " + clientSocket.getRemoteSocketAddress());
+                int data = in.readInt();
+                sumaScore(data);
+                System.out.println("Message: " + data);
+            } 
+            catch(EOFException e) {
+                System.out.println("EOF:"+e.getMessage());
+            } 
+            catch(IOException e) {
+                System.out.println("IO:"+e.getMessage());
+            } finally {
+                try {
+                    clientSocket.close();
+                } catch (IOException e){
+                    System.out.println(e);
+                }
+            }
+        }
+    }
+    
+    
 }
