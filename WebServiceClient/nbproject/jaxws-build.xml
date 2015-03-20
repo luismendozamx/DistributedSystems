@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+        *** GENERATED FROM jax-ws.xml - DO NOT EDIT !                             ***
+        *** TO MODIFY wsimport options USE Web Service node -> Edit WS Attributes ***
+        *** TO CHANGE TARGETS GENERATED TO jaxws-build.xml COPY THOSE             ***
+        *** TARGETS TO ../build.xml AND MODIFY THAT FILE INSTEAD                  ***
+
+        --><project xmlns:xalan="http://xml.apache.org/xslt" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSIMPORT SECTION
+                ===================
+            -->
+    <target name="wsimport-init" depends="init">
+        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${libs.jaxws21.classpath}"/>
+        </taskdef>
+    </target>
+    <target name="wsimport-client-globalweather" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/globalweather"/>
+        <property name="wsdl-globalweather" location="xml-resources/web-service-references/globalweather/wsdl/www.webservicex.net/globalweather.asmx.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/globalweather" destdir="${build.generated.dir}/jax-wsCache/globalweather" wsdl="${wsdl-globalweather}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/globalweather.asmx?WSDL" xnocompile="true" xendorsed="true" package="WeatherClient">
+            <depends file="${wsdl-globalweather}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/globalweather"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/globalweather">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-globalweather" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/globalweather"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/WeatherClient"/>
+    </target>
+    <target name="wsimport-client-airport" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/airport"/>
+        <property name="wsdl-airport" location="xml-resources/web-service-references/airport/wsdl/www.webservicex.net/airport.asmx.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/airport" destdir="${build.generated.dir}/jax-wsCache/airport" wsdl="${wsdl-airport}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/airport.asmx?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-airport}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/airport"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/airport">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-airport" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/airport"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+    </target>
+    <target name="wsimport-client-country" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/country"/>
+        <property name="wsdl-country" location="xml-resources/web-service-references/country/wsdl/www.webservicex.net/country.asmx.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/country" destdir="${build.generated.dir}/jax-wsCache/country" wsdl="${wsdl-country}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/country.asmx?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-country}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/country"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/country">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-country" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/country"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+    </target>
+    <target name="wsimport-client-braille" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/braille"/>
+        <property name="wsdl-braille" location="xml-resources/web-service-references/braille/wsdl/www.webservicex.net/braille.asmx.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/braille" destdir="${build.generated.dir}/jax-wsCache/braille" wsdl="${wsdl-braille}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://www.webservicex.net/braille.asmx?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-braille}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/braille"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/braille">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-braille" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/braille"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/net/webservicex"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-globalweather, wsimport-client-airport, wsimport-client-country, wsimport-client-braille"/>
+</project>

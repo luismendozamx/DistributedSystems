@@ -1,0 +1,13 @@
+
+<CurrentWeather>
+  <Location>Manzanillo International , Mexico (MMZO) 19-09N 104-34W</Location>
+  <Time>Mar 20, 2015 - 05:45 PM EDT / 2015.03.20 2145 UTC</Time>
+  <Wind> from the WSW (240 degrees) at 12 MPH (10 KT):0</Wind>
+  <Visibility> 10 mile(s):0</Visibility>
+  <SkyConditions> mostly cloudy</SkyConditions>
+  <Temperature> 82 F (28 C)</Temperature>
+  <DewPoint> 77 F (25 C)</DewPoint>
+  <RelativeHumidity> 83%</RelativeHumidity>
+  <Pressure> 29.86 in. Hg (1011 hPa)</Pressure>
+  <Status>Success</Status>
+</CurrentWeather>
