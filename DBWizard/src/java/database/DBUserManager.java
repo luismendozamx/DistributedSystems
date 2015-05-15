@@ -149,6 +149,10 @@ public class DBUserManager {
         return tables;
     }
     
+    public void createTable(User user){
+        
+    }
+    
     public int saveUserToDB(User user){
         int res = 0;
         
@@ -195,6 +199,7 @@ public class DBUserManager {
     }
     
     public void reloadUserList(){
+        this.cont = 0;
         try{
             Connection con = DriverManager.getConnection(this.connectionString, dbUser, dbPass);
             Statement s = con.createStatement();
