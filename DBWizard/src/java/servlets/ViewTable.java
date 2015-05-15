@@ -5,23 +5,20 @@
  */
 package servlets;
 
-import database.DBColumn;
-import database.DBUserManager;
-import database.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author luismendoza
  */
-public class UserCreateTable extends HttpServlet {
+@WebServlet(name = "ViewTable", urlPatterns = {"/ViewTable"})
+public class ViewTable extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,45 +33,16 @@ public class UserCreateTable extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            HttpSession session = request.getSession();
-            User currentUser = (User) session.getAttribute("currentUser");
-            
-            int numColumnas = Integer.parseInt(request.getParameter("numColumnas"));
-            String tableName = request.getParameter("tableName");
-            DBColumn[] columns = new DBColumn[20];
-            String auxName, auxType;
-            DBColumn tempColumn;
-            
-            for (int i = 1; i <= numColumnas; i++) {
-                auxName = "campo-" + i;
-                auxType = "tipo-" + i;
-                tempColumn = new DBColumn(request.getParameter(auxName), request.getParameter(auxType));
-                columns[i-1] = tempColumn;
-            }
-            
-            DBUserManager users = (DBUserManager) session.getAttribute("users");
-            
-            if (users == null){
-                try{
-                    Class.forName("org.apache.derby.jdbc.ClientDriver");
-                }catch(ClassNotFoundException cnfe){
-                    System.err.println(cnfe.toString());
-                }
-                users = new DBUserManager("jdbc:derby://localhost:1527/UsersDBW");
-                session.setAttribute("users", users);
-            }
-            
-            int res = users.createTable(currentUser, tableName, columns, numColumnas);
-            
-            if(res == 0){
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/Profile");
-                rd.forward(request, response);
-            }else{
-                request.setAttribute("error", "se generó un error al guardar la tabla");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/create.jsp");
-                rd.forward(request, response);
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ViewTable</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ViewTable at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

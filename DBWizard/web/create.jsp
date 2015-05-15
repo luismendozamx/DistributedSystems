@@ -28,7 +28,7 @@
           function agregaCampo() {
                 var num = parseInt(document.getElementById("numColumnas").value);
                 document.getElementById("numColumnas").value = num + 1;                
-                document.getElementById("columnas").innerHTML += "<div class='columna'>Nombre: <input type='text' name='campo-"+ (num + 1) +"' required='true'> Tipo: <select name='tipo-" + (num + 1) + "'> <option value='integer'> Integer </option> <option value='varchar'> Varchar </option> <option value='double'> Double </option> </select> <br></div>";
+                document.getElementById("columnas").innerHTML += "<div class='columna'>Nombre: <input type='text' name='campo-"+ (num + 1) +"' required='true'> Tipo: <select name='tipo-" + (num + 1) + "'> <option value='integer'> Integer </option> <option value='varchar(50)'> Varchar </option> <option value='double'> Double </option> </select> <br></div>";
           }
 
           function eliminaCampo() {
@@ -52,11 +52,17 @@
                 rd.forward(request, response);
             }
         %>
+        
+        <% String error = (String)request.getAttribute("error"); %>
+        
         <a href="Logout">Log Out</a>
         <a href="Profile">Mi Perfil</a>
         <hr>
         <h1>DB Wizard: Table Manager</h1>
         <p>Crea una tabla.</p>
+        <% if(error != null){ %>
+            <p style="color: red;">Error: <%= error %></p>
+        <% } %>
         <form action="UserCreateTable" method="POST">
             <div class="table-name">
                 Nombre de la tabla: <input type="text" name="tableName" required="true">
@@ -67,7 +73,7 @@
                     Nombre: <input type="text" name="campo-1" required="true">
                     Tipo: <select name="tipo-1">
                     <option value="integer"> Integer </option>
-                    <option value="varchar"> Varchar </option>
+                    <option value="varchar(50)"> Varchar </option>
                     <option value="double"> Double </option>
                     </select> <span style="padding-left: 5px;">(Primaria)</span><br>
                 </div>

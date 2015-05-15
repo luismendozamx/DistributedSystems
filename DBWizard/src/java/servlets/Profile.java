@@ -80,13 +80,16 @@ public class Profile extends HttpServlet {
                 out.println("<p>Aún no tienes tablas, <a href='create.jsp'>crea una nueva</a></p>");
             }else{
                 out.println("<p>Tablas registradas:</p>");
+                out.println("<form action='ViewTable' method=POST>");
                 out.println("<select name='userTables'>");
                 int i = 0;
                 while(i < tables.size()){
-                    out.println("<option>" + tables.get(i) + "</option>");
+                    out.println("<option value='" + tables.get(i) + "'>" + tables.get(i) + "</option>");
                     i++;
                 }
                 out.println("</select>");
+                out.println("<input type='submit' value='Ver tabla' />");
+                out.println("</form>");
                 out.println("<p><a href='create.jsp'>Crea tabla nueva</a></p>");
             }
             

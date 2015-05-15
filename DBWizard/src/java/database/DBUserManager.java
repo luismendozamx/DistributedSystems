@@ -149,21 +149,44 @@ public class DBUserManager {
         return tables;
     }
     
-    public void createTable(User user, DBColumn[] columns){
+    public int createTable(User user, String tableName, DBColumn[] columns, int n){
+        int res;
+        
         try{
             Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/" + user.getDatabase(), this.dbUser, this.dbPass);
             StringBuilder sb = new StringBuilder();
             
             Statement query = con.createStatement();
-            sb.append("create");
+            sb.append("create table " + tableName + "(");
+            
+            for (int i = 0; i < n; i++) {
+                
+                if( i == 0){
+                    sb.append(columns[i].name + " " + columns[i].type + " not null");
+                }else{
+                    sb.append(columns[i].name + " " + columns[i].type);
+                }
+                
+                if(i < n-1){
+                    sb.append(", ");
+                }else{
+                    sb.append(", primary key(" + columns[0].name + "))");
+                }
+                
+            }
+            query.executeUpdate(sb.toString());
+            res = 0;
             
             con.close();            
         }catch(SQLException sqle){
             System.err.println(sqle.toString());
+            res = -1;
         }
         
-        //return tables;
+        return res;
     }
+    
+    
     
     public int saveUserToDB(User user){
         int res = 0;
