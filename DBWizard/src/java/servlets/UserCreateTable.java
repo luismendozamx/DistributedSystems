@@ -5,6 +5,8 @@
  */
 package servlets;
 
+import database.DBColumn;
+import database.DBUserManager;
 import database.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,11 +41,30 @@ public class UserCreateTable extends HttpServlet {
             
             int numColumnas = Integer.parseInt(request.getParameter("numColumnas"));
             String tableName = request.getParameter("tableName");
+            DBColumn[] columns = new DBColumn[20];
+            String auxName, auxType;
+            DBColumn tempColumn;
             
             for (int i = 1; i <= numColumnas; i++) {
-                
+                auxName = "campo-" + i;
+                auxType = "tipo-" + i;
+                tempColumn = new DBColumn(request.getParameter(auxName), request.getParameter(auxType));
+                columns[i] = tempColumn;
             }
             
+            DBUserManager users = (DBUserManager) session.getAttribute("users");
+            
+            if (users == null){
+                try{
+                    Class.forName("org.apache.derby.jdbc.ClientDriver");
+                }catch(ClassNotFoundException cnfe){
+                    System.err.println(cnfe.toString());
+                }
+                users = new DBUserManager("jdbc:derby://localhost:1527/UsersDBW");
+                session.setAttribute("users", users);
+            }
+            
+            users.createTable(currentUser, columns);
         }
     }
 

@@ -149,8 +149,20 @@ public class DBUserManager {
         return tables;
     }
     
-    public void createTable(User user){
+    public void createTable(User user, DBColumn[] columns){
+        try{
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/" + user.getDatabase(), this.dbUser, this.dbPass);
+            StringBuilder sb = new StringBuilder();
+            
+            Statement query = con.createStatement();
+            sb.append("create");
+            
+            con.close();            
+        }catch(SQLException sqle){
+            System.err.println(sqle.toString());
+        }
         
+        //return tables;
     }
     
     public int saveUserToDB(User user){
@@ -165,8 +177,8 @@ public class DBUserManager {
             sb.append("','").append(user.getPassword());
             sb.append("','").append(user.getDatabase()).append("')\n");
             
-            Statement s = con.createStatement();
-            s.executeUpdate(sb.toString());
+            Statement query = con.createStatement();
+            query.executeUpdate(sb.toString());
 
             // close the connection
             con.commit();

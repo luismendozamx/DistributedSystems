@@ -4,6 +4,7 @@
     Author     : luismendoza
 --%>
 
+<%@page import="database.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,13 +28,11 @@
           function agregaCampo() {
                 var num = parseInt(document.getElementById("numColumnas").value);
                 document.getElementById("numColumnas").value = num + 1;                
-                document.getElementById("columnas").innerHTML += "<div class='columna'>Nombre: <input type='text' name='campo-"+ (num + 1) +"' required='true'> Tipo: <select name='" + (num + 1) + "'> <option value='integer'> Integer </option> <option value='varchar'> Varchar </option> <option value='double'> Double </option> </select> <br></div>";
+                document.getElementById("columnas").innerHTML += "<div class='columna'>Nombre: <input type='text' name='campo-"+ (num + 1) +"' required='true'> Tipo: <select name='tipo-" + (num + 1) + "'> <option value='integer'> Integer </option> <option value='varchar'> Varchar </option> <option value='double'> Double </option> </select> <br></div>";
           }
 
           function eliminaCampo() {
-            if (document.getElementsByClassName('columna').length == 1) {
-                
-            } else {
+            if (document.getElementsByClassName('columna').length !== 1) {
                 var num = parseInt(document.getElementById("numColumnas").value);
                 document.getElementById("numColumnas").value = num - 1;
                 var n = document.getElementById("columnas").innerHTML;
@@ -44,6 +43,15 @@
         </script>   
     </head>
     <body>
+        <%
+            session = request.getSession();
+            User currentUser = (User) session.getAttribute("currentUser");
+            
+            if(currentUser == null){
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+                rd.forward(request, response);
+            }
+        %>
         <a href="Logout">Log Out</a>
         <a href="Profile">Mi Perfil</a>
         <hr>
