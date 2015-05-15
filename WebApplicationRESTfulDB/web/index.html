@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Administración de Personal</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function callRESTfulWebService(id, method, target, msg) {
+                var ajaxRequest;
+                
+                if (window.XMLHttpRequest) {
+                    ajaxRequest = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                } else {
+                    ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                }
+                ajaxRequest.onreadystatechange = function () {
+                    if (ajaxRequest.readyState == 4 &&
+                            (ajaxRequest.status == 200 || ajaxRequest.status == 204)) { //aquí cambia por si no envía nada de regreso el WS que llamas
+                        document.getElementById(id).innerHTML = ajaxRequest.responseText;
+                    }
+                }
+                target = target + "?id=" + document.getElementById("id").value 
+                        + "&name=" + document.getElementById("name").value;
+               
+                ajaxRequest.open(method, target, true /*async*/);
+                ajaxRequest.setRequestHeader("Content-Type", "text/html");
+                ajaxRequest.send(msg);
+            }
+        </script>
+        
+    </head>
+    <body>
+        ID: <input id="id" type="text" name="id" value="" /><br>
+        NAME: <input id="name" type="text" name="name" value="" /><br>
+        <input id="add" type="button" value="Agregar" onclick="callRESTfulWebService('resultado'
+            , 'PUT','http://localhost:8080/WebApplicationRESTfulDB/webresources/MyPath2', '')" /><br>
+        <input id="delete" type="submit" value="Borrar" onclick="callRESTfulWebService('resultado'
+            , 'DELETE','http://localhost:8080/WebApplicationRESTfulDB/webresources/MyPath2', '')"/><br>
+        <input id="update" type="submit" value="Modificar" onclick="callRESTfulWebService('resultado'
+            , 'POST','http://localhost:8080/WebApplicationRESTfulDB/webresources/MyPath2', '')" /><br>
+        <input id="list" type="submit" value="Listar" onclick="callRESTfulWebService('resultado'
+            , 'GET','http://localhost:8080/WebApplicationRESTfulDB/webresources/MyPath2', '')" /><br>
+        
+        <div id="resultado"></div>
+    </body>
+</html>

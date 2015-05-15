@@ -40,7 +40,9 @@ public class ViewTable extends HttpServlet {
             out.println("<title>Servlet ViewTable</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewTable at " + request.getContextPath() + "</h1>");
+            
+            
+            
             out.println("</body>");
             out.println("</html>");
         }
