@@ -40,7 +40,7 @@ public class Profile extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Profile</title>");
+            out.println("<title>Profile</title>");
             
             HttpSession session = request.getSession();
             User currentUser = (User) session.getAttribute("currentUser");
@@ -89,6 +89,7 @@ public class Profile extends HttpServlet {
                 }
                 out.println("</select>");
                 out.println("<input type='submit' value='Ver tabla' />");
+                out.println("<input type='submit' value='Eliminar tabla' onclick='' />");
                 out.println("</form>");
                 out.println("<p><a href='create.jsp'>Crea tabla nueva</a></p>");
             }

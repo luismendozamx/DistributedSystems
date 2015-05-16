@@ -68,7 +68,7 @@ public class UserCreateTable extends HttpServlet {
             int res = users.createTable(currentUser, tableName, columns, numColumnas);
             
             if(res == 0){
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/Profile");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/profile.jsp");
                 rd.forward(request, response);
             }else{
                 request.setAttribute("error", "se generó un error al guardar la tabla");

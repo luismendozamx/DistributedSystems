@@ -61,7 +61,7 @@ public class UserLogIn extends HttpServlet {
             if(users.loginUser(username, password)){
                 User currentUser = users.getUser(username);
                 session.setAttribute("currentUser", currentUser);
-                rd = getServletContext().getRequestDispatcher("/Profile");
+                rd = getServletContext().getRequestDispatcher("/profile.jsp");
                 rd.forward(request, response);
             }else{
                 session.setAttribute("currentUser", null);

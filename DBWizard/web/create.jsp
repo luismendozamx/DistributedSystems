@@ -56,7 +56,7 @@
         <% String error = (String)request.getAttribute("error"); %>
         
         <a href="Logout">Log Out</a>
-        <a href="Profile">Mi Perfil</a>
+        <a href="profile.jsp">Mi Perfil</a>
         <hr>
         <h1>DB Wizard: Table Manager</h1>
         <p>Crea una tabla.</p>

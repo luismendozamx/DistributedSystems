@@ -63,7 +63,7 @@ public class UserRegister extends HttpServlet {
                     session.setAttribute("currentUser", currentUser);
                     
                     // redirigir usuario a profile.
-                    rd = getServletContext().getRequestDispatcher("/Profile");
+                    rd = getServletContext().getRequestDispatcher("/profile.jsp");
                     rd.include(request, response);
                     break;
                 case 1:

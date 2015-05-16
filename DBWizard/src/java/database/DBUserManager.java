@@ -187,6 +187,32 @@ public class DBUserManager {
     }
     
     
+    public boolean deletUserTable(String username, String tableName){
+        boolean res = true;
+        
+        User user = getUser(username);
+        
+        try{
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/" + user.getDatabase(), this.dbUser, this.dbPass);
+            StringBuilder sb = new StringBuilder();
+            
+            // always delet from root schema
+            sb.append("drop table root." + tableName);
+            
+            Statement query = con.createStatement();
+            query.executeUpdate(sb.toString());
+
+            // close the connection
+            con.commit();
+            con.close();
+        }catch(SQLException sqle){
+            System.err.println(sqle.toString());
+            res = false;
+        }
+        
+        return res;
+    }
+    
     
     public int saveUserToDB(User user){
         int res = 0;
